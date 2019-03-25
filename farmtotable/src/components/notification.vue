@@ -5,18 +5,18 @@
       v-model="showAlert"
     >We have found providers in your area! Click HERE for directions.</b-alert>
 
-    <b-button @click="showAlert=true" variant="info" class="m-1">Submit</b-button>
+    <b-button @click="showAlert=true" variant="info" class="m-1">Search</b-button>
   </div>
 </template>
 
 <script>
 export default {
+  name: "notification",
   data() {
     return {
       showAlert: false
     };
   },
-  name: "notification",
   methods: {}
 };
 </script>
