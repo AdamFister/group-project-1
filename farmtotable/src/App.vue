@@ -2,18 +2,20 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <notification></notification>
+    <radius></radius>
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 import notification from "./components/notification.vue";
-
+import radius from "./components/radius.vue";
 export default {
   name: "app",
   components: {
     HelloWorld,
-    notification
+    notification,
+    radius
   }
 };
 </script>
