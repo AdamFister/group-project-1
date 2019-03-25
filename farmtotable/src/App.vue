@@ -1,19 +1,28 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
+ 
+    <notification></notification>
+    <radius></radius>
+
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <MapComponent></MapComponent>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import MapComponent from './components/MapComponent.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import notification from "./components/notification.vue";
+import radius from "./components/radius.vue";
+
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     HelloWorld,
+    notification,
+    radius,
     MapComponent
   },
   mounted: function () {
@@ -25,13 +34,14 @@ export default {
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11"
     });
+
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
