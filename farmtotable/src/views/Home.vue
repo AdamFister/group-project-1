@@ -1,32 +1,35 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-     <button @click="increment">+</button>
-     <button @click="decrement">-</button>
-     <div>{{ counter }}</div>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+    <div>{{ counter }}</div>
+    <radius></radius>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
+import radius from "../components/radius";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
+    radius
   },
-  methods:{
-    increment (){
-      this.$store.commit('increment');
+  methods: {
+    increment() {
+      this.$store.commit("increment");
     },
-    decrement (){
-      this.$store.commit('decrement');
+    decrement() {
+      this.$store.commit("decrement");
     }
   },
   computed: {
-    counter (){
+    counter() {
       return this.$store.state.counter;
     }
   }
-}
+};
 </script>
