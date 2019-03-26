@@ -4,6 +4,8 @@
      <button @click="increment">+</button>
      <button @click="decrement">-</button>
      <div>{{ counter }}</div>
+     <input type="text" name="produce" placeholder="enter veggies here" v-model="produce_text">
+     <button @click="addProduce">Add</button>
   </div>
 </template>
 
@@ -13,6 +15,11 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'home',
+  data () {
+    return {
+      produce_text:""
+    }
+  },
   components: {
   },
   methods:{
@@ -21,6 +28,11 @@ export default {
     },
     decrement (){
       this.$store.commit('decrement');
+    },
+    addProduce () {
+      var p = this.produce_text;
+      // console.log(p);
+      this.$store.commit('addProduce', {name:p});
     }
   },
   computed: {
