@@ -1,21 +1,39 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
     <notification/>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+    <div>{{ counter }}</div>
+    <radius></radius>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 import notification from "@/components/notification.vue";
+import { mapActions } from "vuex";
+import radius from "../components/radius";
 
 export default {
   name: "home",
   components: {
-    HelloWorld,
-    notification
+    notification,
+    radius
+  },
+  methods: {
+    increment() {
+      this.$store.commit("increment");
+    },
+    decrement() {
+      this.$store.commit("decrement");
+    }
+  },
+  computed: {
+    counter() {
+      return this.$store.state.counter;
+    }
+
   }
 };
 </script>
