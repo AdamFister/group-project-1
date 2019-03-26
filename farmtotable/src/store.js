@@ -14,6 +14,7 @@ export default new Vuex.Store({
     decrement (state){
       state.counter--;
     }
+
   },
   actions: {
 
