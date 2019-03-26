@@ -1,0 +1,32 @@
+<template>
+  <div class="home">
+    <img alt="Vue logo" src="../assets/logo.png">
+     <button @click="increment">+</button>
+     <button @click="decrement">-</button>
+     <div>{{ counter }}</div>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import { mapActions } from 'vuex'
+
+export default {
+  name: 'home',
+  components: {
+  },
+  methods:{
+    increment (){
+      this.$store.commit('increment');
+    },
+    decrement (){
+      this.$store.commit('decrement');
+    }
+  },
+  computed: {
+    counter (){
+      return this.$store.state.counter;
+    }
+  }
+}
+</script>
