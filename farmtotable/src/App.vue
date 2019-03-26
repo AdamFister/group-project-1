@@ -18,25 +18,15 @@ export default {
     MapComponent
   },
   mounted: function() {
-    var mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
-    mapboxgl.accessToken =
-      "pk.eyJ1Ijoic21vaGVyZWlnaHQiLCJhIjoiY2p0b284NHhkMGdhMzN5bXFvYWR2NWNiMSJ9.9w212cQxAkYNm0lPrPtZVg";
-    var map = new mapboxgl.Map({
-      container: "map",
-      style: "mapbox://styles/mapbox/streets-v11"
+    var map;
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: 38.0355597, lng: -84.4924768 },
+      zoom: 8
     });
-    map.addControl(new mapboxgl.NavigationControl());
-    map.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true
-        },
-        trackUserLocation: true
-      })
-    );
   }
 };
 </script>
+
 
 <style>
 #app {

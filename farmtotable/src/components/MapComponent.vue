@@ -6,11 +6,10 @@
 export default {
   name: "MapComponent",
 };
-
 </script>
 
 <style>
 #map {
-  min-height: 400px;
+  height: 300px;
 }
 </style>
