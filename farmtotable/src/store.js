@@ -7,8 +7,8 @@ export default new Vuex.Store({
   state: {
     counter: 0,
     farmers: {
-      name: "Joe",
-      location: "Lexington, KY",
+      name: "",
+      location: "",
       produce: []
     }
   
@@ -21,8 +21,14 @@ export default new Vuex.Store({
       state.counter--;
     },
     addProduce (state, produceToAdd) {
-      state.farmers.produce.push(produceToAdd.name);
+      state.farmers.produce.push(produceToAdd.produce);
       console.log(state.farmers.produce);
+    },
+    addName (state, nameToAdd) {
+      state.farmers.name = nameToAdd.name;
+    },
+    addLocation (state, locationToAdd) {
+      state.farmers.location = locationToAdd.location;
     }
   },
   actions: {
