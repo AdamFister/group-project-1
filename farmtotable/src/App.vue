@@ -23,7 +23,9 @@ export default {
       center: { lat: 38.0355597, lng: -84.4924768 },
       zoom: 8
     });
+    
   }
+  
 };
 </script>
 
