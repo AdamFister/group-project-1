@@ -1,5 +1,5 @@
 <template>
-  <div><a :href="getFarmerURL" target="_blank">My Location</a></div>
+  <div><a :href="getFarmerURL" target="_blank">Find me here!</a></div>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ export default {
     return {
       location_url: "https://www.google.com/maps/dir/?api=1",
       zoom_setting: "16z",
-      farmer_location_str: "@38.0355597,-84.4924768",
+      // farmer_location_str: "38.0355597,-84.4924768",
     }
   },
   computed: {
