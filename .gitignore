@@ -1,5 +1,6 @@
 .DS_Store
 node_modules
+group-project-1.code-workspace
 /dist
 
 # local env files
