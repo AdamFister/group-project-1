@@ -1,16 +1,20 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <!-- <img alt="Vue logo" src="../assets/logo.png">
      <button @click="increment">+</button>
      <button @click="decrement">-</button>
-     <div>{{ counter }}</div>
-     <div>{{ name }}</div>
+     <div>{{ counter }}</div> -->
+
+     <input @keyup.enter="addName" type="text" name="name" placeholder="enter name here" v-model="name_text">
+     <button @click="addName">Add Name</button><br>
+     <input @keyup.enter="addLocation" type="text" name="location" placeholder="enter location here" v-model="location_text">
+     <button @click="addLocation">Add Location</button><br>
+     <input @keyup.enter="addProduce" type="text" name="produce" placeholder="enter produce here" v-model="produce_text">
+     <button @click="addProduce">Add Produce</button><br>
+      <div>{{ name }}</div>
      <div>{{ location }}</div>
      <div v-for="item in produce">{{ item }}</div>
-     <input @keyup.enter="addName" type="text" name="name" placeholder="enter name here" v-model="name_text">
-     <input @keyup.enter="addLocation" type="text" name="location" placeholder="enter location here" v-model="location_text">
-     <input @keyup.enter="addProduce" type="text" name="produce" placeholder="enter veggies here" v-model="produce_text">
-     <!-- <button @click="addProduce; addName; addLocation">Add</button> -->
+     <!-- <button @click="createProfile">Create Profile</button> -->
   </div>
 </template>
 
