@@ -6,15 +6,17 @@
      <div>{{ counter }}</div> -->
 
      <input @keyup.enter="addName" type="text" name="name" placeholder="enter name here" v-model="name_text">
-     <button @click="addName">Add Name</button><br>
+
      <input @keyup.enter="addLocation" type="text" name="location" placeholder="enter location here" v-model="location_text">
-     <button @click="addLocation">Add Location</button><br>
+
      <input @keyup.enter="addProduce" type="text" name="produce" placeholder="enter produce here" v-model="produce_text">
-     <button @click="addProduce">Add Produce</button><br>
+
+     <div>{{ allFarmers }}</div>
       <div>{{ name }}</div>
      <div>{{ location }}</div>
      <div v-for="item in produce">{{ item }}</div>
      <!-- <button @click="createProfile">Create Profile</button> -->
+     <button @click="addFarmer">Add Profile</button>
   </div>
 </template>
 
@@ -56,6 +58,9 @@ export default {
       var l = this.location_text;
       this.$store.commit('addLocation', {location:l});
       this.location_text = "";
+    },
+    addFarmer () {
+      this.$store.commit('addFarmer', {name:this.name_text, location:this.location_text, produce:[ {name:this.produce_text}]});
     }
   },
   computed: {
@@ -70,6 +75,9 @@ export default {
     },
     produce (){
       return this.$store.state.farmers.produce;
+    },
+    allFarmers (){
+      return this.$store.state.allFarmers;
     }
   }
 }
