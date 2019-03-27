@@ -2,7 +2,7 @@
 <template>
   <div>
     <p>Searching for :{{" " + produce}}</p>
-    <p> Current location:{{" " + location}}</p>
+
     <input @keyup.enter="submit" type="text" v-model="nuProduce" placeholder="Produce">
      </div>
 </template>
