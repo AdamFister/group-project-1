@@ -49,16 +49,16 @@ export default {
       this.$store.commit('addProduce', {produce:p});
       this.produce_text = "";
     },
-    addName () {
-      var n = this.name_text;
-      this.$store.commit('addName', {name:n});
-      this.name_text = "";
-    },
-    addLocation () {
-      var l = this.location_text;
-      this.$store.commit('addLocation', {location:l});
-      this.location_text = "";
-    },
+    // addName () {
+    //   var n = this.name_text;
+    //   this.$store.commit('addName', {name:n});
+    //   this.name_text = "";
+    // },
+    // addLocation () {
+    //   var l = this.location_text;
+    //   this.$store.commit('addLocation', {location:l});
+    //   this.location_text = "";
+    // },
     addFarmer () {
       this.$store.commit('addFarmer', {name:this.name_text, location:this.location_text, produce:[ {name:this.produce_text}]});
     }
