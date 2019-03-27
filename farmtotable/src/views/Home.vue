@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-<<<<<<< HEAD
     <!-- <img alt="Vue logo" src="../assets/logo.png">
      <button @click="increment">+</button>
      <button @click="decrement">-</button>
@@ -18,14 +17,9 @@
      <div v-for="item in produce">{{ item }}</div>
      <!-- <button @click="createProfile">Create Profile</button> -->
      <button @click="addFarmer">Add Profile</button>
-=======
-    <img alt="Vue logo" src="../assets/logo.png">
+
     <notification/>
-    <button @click="increment">+</button>
-    <button @click="decrement">-</button>
-    <div>{{ counter }}</div>
     <radius></radius>
->>>>>>> 3e8ed3dbc49d8719f1912ad496116bffed03cb86
   </div>
 </template>
 
@@ -36,7 +30,6 @@ import { mapActions } from "vuex";
 import radius from "../components/radius";
 
 export default {
-<<<<<<< HEAD
   name: 'home',
   data () {
     return {
@@ -46,9 +39,6 @@ export default {
       produce_text:""
     }
   },
-=======
-  name: "home",
->>>>>>> 3e8ed3dbc49d8719f1912ad496116bffed03cb86
   components: {
     notification,
     radius
@@ -57,7 +47,6 @@ export default {
     increment() {
       this.$store.commit("increment");
     },
-<<<<<<< HEAD
     decrement (){
       this.$store.commit('decrement');
     },
@@ -79,10 +68,6 @@ export default {
     // },
     addFarmer () {
       this.$store.commit('addFarmer', {name:this.name_text, location:this.location_text, produce:[ {name:this.produce_text}]});
-=======
-    decrement() {
-      this.$store.commit("decrement");
->>>>>>> 3e8ed3dbc49d8719f1912ad496116bffed03cb86
     }
   },
   computed: {
