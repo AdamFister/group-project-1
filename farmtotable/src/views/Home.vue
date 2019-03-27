@@ -5,6 +5,7 @@
     <button @click="increment">+</button>
     <button @click="decrement">-</button>
     <div>{{ counter }}</div>
+    <searchBar></searchBar>
     <radius></radius>
   </div>
 </template>
@@ -14,12 +15,14 @@
 import notification from "@/components/notification.vue";
 import { mapActions } from "vuex";
 import radius from "../components/radius";
+import searchBar from "../components/searchBar";
 
 export default {
   name: "home",
   components: {
     notification,
-    radius
+    radius,
+    searchBar,
   },
   methods: {
     increment() {
