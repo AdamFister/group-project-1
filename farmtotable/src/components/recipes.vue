@@ -17,7 +17,7 @@ export default {
         "a585a9b005msh459bd2f7657ed56p17e34bjsn1f0dd44c7986"
       )
       .end(function(result) {
-        console.log(result.status, result.headers, result.body);
+        console.log(result);
       });
   }
 };
