@@ -2,9 +2,6 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <notification/>
-    <button @click="increment">+</button>
-    <button @click="decrement">-</button>
-    <div>{{ counter }}</div>
     <searchBar></searchBar>
     <radius></radius>
   </div>
@@ -25,17 +22,9 @@ export default {
     searchBar,
   },
   methods: {
-    increment() {
-      this.$store.commit("increment");
-    },
-    decrement() {
-      this.$store.commit("decrement");
-    }
+
   },
   computed: {
-    counter() {
-      return this.$store.state.counter;
-    }
 
   }
 };
