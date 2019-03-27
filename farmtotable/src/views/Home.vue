@@ -6,6 +6,7 @@
     <button @click="decrement">-</button>
     <div>{{ counter }}</div>
     <radius></radius>
+    <recipes></recipes>
   </div>
 </template>
 
@@ -14,12 +15,14 @@
 import notification from "@/components/notification.vue";
 import { mapActions } from "vuex";
 import radius from "../components/radius";
+import recipes from "../components/recipes";
 
 export default {
   name: "home",
   components: {
     notification,
-    radius
+    radius,
+    recipes
   },
   methods: {
     increment() {
