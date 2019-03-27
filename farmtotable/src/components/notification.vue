@@ -15,9 +15,16 @@ export default {
   name: "notification",
   data() {
     return {
-      showAlert: false
+      
     };
   },
-  methods: {}
+  methods: {},
+  computed: {
+
+    showAlerT(){
+      return false;
+    }
+  },
+
 };
 </script>
