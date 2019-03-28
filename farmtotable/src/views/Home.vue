@@ -68,6 +68,7 @@ export default {
       this.$store.commit("addFarmer", {
         name: this.name_text,
         location: this.location_text,
+        geolocation: [Math.floor(Math.random()*100),Math.floor(Math.random()*100)],
         produce: [{ name: this.produce_text }]
       });
     }
