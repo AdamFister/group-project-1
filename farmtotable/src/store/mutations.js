@@ -6,23 +6,23 @@ if (navigator.userAgent.indexOf('PhantomJS') > -1) {
 }
 
 export const mutations = {
-    // increment (state) {
-    //   state.counter++;
-    // },
-    // decrement (state){
-    //   state.counter--;
-    // },
+
     addProduce (state, produceToAdd) {
-      state.allFarmers[allFarmers.length-1].produce.push(produceToAdd.produce);
-      console.log(state.allFarmers[allFarmers.length-1])
+      state.allFarmers[state.allFarmers.length-1].produce.push(produceToAdd.produce);
     },
-    // addName (state, nameToAdd) {
-    //   state.farmers.name = nameToAdd.name;
-    // },
-    // addLocation (state, locationToAdd) {
-    //   state.farmers.location = locationToAdd.location;
-    // },
+
     addFarmer (state, farmerObj) {
+      // console.log(state.allFarmers.name);
       state.allFarmers.push(farmerObj);
+    },
+
+    addUserCoords (state, pos) {
+      let lat = pos.coords.latitude;
+      let lon = pos.coords.longitude;
+      console.log("lat:",lat);
+      console.log("lon:",lon);
+      state.user.usergeolocation.push(lat);
+      state.user.usergeolocation.push(lon);
     }
+
   }
