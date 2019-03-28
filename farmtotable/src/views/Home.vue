@@ -18,18 +18,14 @@
      <!-- <button @click="createProfile">Create Profile</button> -->
      <button @click="addFarmer">Add Profile</button>
 
-    <notification/>
-    <radius></radius>
-    <recipes></recipes>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import notification from "@/components/notification.vue";
+
 import { mapActions } from "vuex";
-import radius from "../components/radius";
-import recipes from "../components/recipes";
+
 
 export default {
   name: 'home',
@@ -42,9 +38,8 @@ export default {
     }
   },
   components: {
-    notification,
-    radius,
-    recipes
+   
+    
   },
   methods: {
     increment() {
