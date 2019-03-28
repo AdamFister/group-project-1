@@ -12,6 +12,7 @@ export default new Vuex.Store({
     farmers: {
       name: "",
       location: "",
+      geolocation: [],
       produce: []
     },
     allFarmers: JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '[]'),  

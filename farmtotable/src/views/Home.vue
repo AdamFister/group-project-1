@@ -14,7 +14,7 @@
      <div>{{ allFarmers }}</div>
       <div>{{ name }}</div>
      <div>{{ location }}</div>
-     <div v-for="item in produce">{{ item }}</div>
+     <div :v-for="item in produce">{{ item }}</div>
      <!-- <button @click="createProfile">Create Profile</button> -->
      <button @click="addFarmer">Add Profile</button>
 

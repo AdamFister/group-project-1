@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-    <MapComponent></MapComponent>
-      <router-link to="/">Provider</router-link> | 
+      <MapComponent></MapComponent>
+      <router-link to="/">Provider</router-link>|
       <router-link to="/about">Consumer</router-link>
     </div>
     <router-view/>
@@ -16,9 +16,8 @@ export default {
   name: "app",
   components: {
     MapComponent
-  }, 
+  }
 };
-
 </script>
 
 
