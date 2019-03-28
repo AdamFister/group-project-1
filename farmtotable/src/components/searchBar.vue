@@ -22,7 +22,7 @@ export default {
       produce: "",
       nuProduce: "",
       currLocation: "",
-      location: ""
+
     };
   },
   methods: {

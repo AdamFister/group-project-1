@@ -3,6 +3,7 @@
     <h1>This is the consumer page</h1>
     <searchBar></searchBar>
     <notification/>
+
   </div>
 </template>
 <script>
