@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-
     <input
       @keyup.enter="addName"
       type="text"
@@ -30,6 +29,7 @@
     <!-- <button @click="createProfile">Create Profile</button> -->
     <button @click="addFarmer">Add Profile</button>
     <button @click="addProduce">Add Produce</button>
+    <button @click="evaluateProximity">Proximity</button>
 
     <notification/>
     <radius></radius>
@@ -57,20 +57,25 @@ export default {
     radius
   },
   methods: {
-
     addProduce() {
       var p = this.produce_text;
       // console.log(p);
-      this.$store.commit("addProduce", {produce: {name: p}});
+      this.$store.commit("addProduce", { produce: { name: p } });
       this.produce_text = "";
     },
     addFarmer() {
-      this.$store.commit("addFarmer", {
+      this.$store.dispatch("getFarmerLocation", {
         name: this.name_text,
         location: this.location_text,
-        geolocation: [Math.floor(Math.random()*100),Math.floor(Math.random()*100)],
+        geolocation: [
+          0,
+          0
+        ],
         produce: [{ name: this.produce_text }]
-      });
+      })
+    },
+    getProximity() {
+      
     }
   },
   computed: {

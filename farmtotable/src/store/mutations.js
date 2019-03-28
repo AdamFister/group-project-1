@@ -22,8 +22,9 @@ export const mutations = {
       let lon = pos.coords.longitude;
       console.log("lat:",lat);
       console.log("lon:",lon);
-      state.user.usergeolocation.push(lat);
-      state.user.usergeolocation.push(lon);
+      state.user.usergeolocation.push ({lat:lat, lng:lon});
+        
+      
     }
 
   }
