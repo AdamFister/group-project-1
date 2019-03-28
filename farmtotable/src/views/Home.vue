@@ -26,19 +26,21 @@
     >
 
     <div>{{ allFarmers }}</div>
+
     <!-- <div v-for="item in produce">{{ item }}</div> -->
     <!-- <button @click="createProfile">Create Profile</button> -->
     <button @click="addFarmer">Add Profile</button>
     <button @click="addProduce">Add Produce</button>
 
-    <notification/>
+
+    
     <radius></radius>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import notification from "@/components/notification.vue";
+
 import { mapActions } from "vuex";
 import radius from "../components/radius";
 
@@ -53,8 +55,8 @@ export default {
     };
   },
   components: {
-    notification,
-    radius
+    
+    radius,
   },
   methods: {
 
@@ -64,6 +66,7 @@ export default {
       this.$store.commit("addProduce", {produce: {name: p}});
       this.produce_text = "";
     },
+    
     addFarmer() {
       this.$store.commit("addFarmer", {
         name: this.name_text,
@@ -74,6 +77,17 @@ export default {
     }
   },
   computed: {
+
+    name() {
+      return this.$store.state.farmers.name;
+    },
+    location() {
+      return this.$store.state.farmers.location;
+    },
+    produce() {
+      return this.$store.state.farmers.produce;
+    },
+
     allFarmers() {
       return this.$store.state.allFarmers;
     }
