@@ -1,12 +1,26 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
+    <MapComponent></MapComponent>
+      <router-link to="/">Provider</router-link> | 
+      <router-link to="/about">Consumer</router-link>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import MapComponent from "./components/MapComponent.vue";
+
+export default {
+  name: "app",
+  components: {
+    MapComponent
+  }, 
+};
+
+</script>
+
 
 <style>
 #app {
@@ -18,3 +32,4 @@
   margin-top: 60px;
 }
 </style>
+
