@@ -31,18 +31,15 @@
     <!-- <button @click="createProfile">Create Profile</button> -->
     <button @click="addFarmer">Add Profile</button>
     <button @click="addProduce">Add Produce</button>
-
-
     
-    <radius></radius>
+    
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-import { mapActions } from "vuex";
-import radius from "../components/radius";
+// import { mapActions } from "vuex";
 
 export default {
   name: "home",
@@ -51,12 +48,12 @@ export default {
       produce_text: "",
       name_text: "",
       location_text: "",
-      produce_text: ""
+      geolocationarray: []
     };
   },
   components: {
     
-    radius,
+    
   },
   methods: {
 
@@ -68,10 +65,14 @@ export default {
     },
     
     addFarmer() {
+      // this.location_text
+      //api call here
+      //update some variable geoloc
       this.$store.commit("addFarmer", {
         name: this.name_text,
         location: this.location_text,
         geolocation: [Math.floor(Math.random()*100),Math.floor(Math.random()*100)],
+        // geolocation: this.geolocationarray,
         produce: [{ name: this.produce_text }]
       });
     }
