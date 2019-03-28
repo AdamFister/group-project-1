@@ -2,7 +2,7 @@
   <div>
     <div><p>{{ lat }} {{ lon }}</p></div>
     <div><p>{{ error }}</p></div>
-    <div><button @click = "getUserCoords()">Coords.</button></div>
+    <div><button @click = "getUserCoords()">Get Location</button></div>
   </div>
 </template>
 
@@ -28,7 +28,6 @@ export default {
       this.lat = position.coords.latitude;
       this.lon = position.coords.longitude;
       console.log(position);
-      
       this.$store.commit("addUserCoords", position);
       console.log(this.$store.state.user.usergeolocation);
     }

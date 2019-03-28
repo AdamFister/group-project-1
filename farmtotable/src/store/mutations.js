@@ -6,23 +6,14 @@ if (navigator.userAgent.indexOf('PhantomJS') > -1) {
 }
 
 export const mutations = {
-    // increment (state) {
-    //   state.counter++;
-    // },
-    // decrement (state){
-    //   state.counter--;
-    // },
+
     addProduce (state, produceToAdd) {
       state.allFarmers[state.allFarmers.length-1].produce.push(produceToAdd.produce);
       console.log(state.allFarmers[state.allFarmers.length-1])
     },
-    // addName (state, nameToAdd) {
-    //   state.farmers.name = nameToAdd.name;
-    // },
-    // addLocation (state, locationToAdd) {
-    //   state.farmers.location = locationToAdd.location;
-    // },
+
     addFarmer (state, farmerObj) {
+      // console.log(state.allFarmers.name);
       state.allFarmers.push(farmerObj);
     },
 
@@ -34,4 +25,5 @@ export const mutations = {
       state.user.usergeolocation.push(lat);
       state.user.usergeolocation.push(lon);
     }
+
   }
