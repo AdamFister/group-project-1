@@ -1,9 +1,9 @@
 
 
 export default {
-    addFarmerAction ({ state, commit }, farmerObj) {
-      commit('addFarmer', farmerObj)
-    }
+    // addFarmerAction ({ state, commit }, farmerObj) {
+    //   commit('addFarmer', farmerObj)
+    // }
 
 
   }

@@ -49,7 +49,7 @@ export default {
       produce_text: "",
       name_text: "",
       location_text: "",
-      produce_text: ""
+      geolocationarray: []
     };
   },
   components: {
@@ -65,10 +65,14 @@ export default {
       this.produce_text = "";
     },
     addFarmer() {
+      // this.location_text
+      //api call here
+      //update some variable geoloc
       this.$store.commit("addFarmer", {
         name: this.name_text,
         location: this.location_text,
         geolocation: [Math.floor(Math.random()*100),Math.floor(Math.random()*100)],
+        // geolocation: this.geolocationarray,
         produce: [{ name: this.produce_text }]
       });
     }
