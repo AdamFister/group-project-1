@@ -2,7 +2,7 @@
   <div>
     <div><p>Lat = {{ lat }} Long = {{ lon }}</p></div>
     <div><p>{{ error }}</p></div>
-    <div><button @click = "myFunction()">Coords.</button></div>
+    <div><button @click = "getUserCoords()">Get Location</button></div>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
     }
   },
   methods: {
-    myFunction: function() {
+    getUserCoords: function() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.showPosition);
       } else {
@@ -27,6 +27,10 @@ export default {
     showPosition: function(position) {
       this.lat = position.coords.latitude;
       this.lon = position.coords.longitude;
+      console.log(position);
+
+      this.$store.commit("addUserCoords", position);
+      console.log(this.$store.state.user.usergeolocation);
     }
   }
 };

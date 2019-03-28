@@ -8,14 +8,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    counter: 0,
     farmers: {
       name: "",
       location: "",
-      geolocation:[],
-      produce: [],
+      geolocation: [],
+      produce: []
     },
     allFarmers: JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '[]'),
+
+    user: { 
+        usergeolocation: []
+    }  
   },
   mutations,
   actions,
