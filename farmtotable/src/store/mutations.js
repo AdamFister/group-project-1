@@ -23,6 +23,20 @@ export const mutations = {
       // console.log("lon:",lon);
       state.user.usergeolocation.push(lat);
       state.user.usergeolocation.push(lon);
+    },
+
+    searchForProduce (state, produceObj) {
+      // console.log(state.allFarmers.length);
+      // console.log(produceObj.item);
+      // console.log(state.allFarmers[0].produce[0].name);
+      
+      for (let i=0; i<state.allFarmers.length; i++) {
+        if (state.allFarmers[i].produce[0].name == produceObj.item) {
+          // console.log("FARMER HAS IT");
+          // console.log(state.allFarmers[i]);
+          state.searchResults.push(state.allFarmers[i]);
+        }
+      }
     }
 
   }

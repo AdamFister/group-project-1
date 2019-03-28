@@ -31,18 +31,15 @@
     <!-- <button @click="createProfile">Create Profile</button> -->
     <button @click="addFarmer">Add Profile</button>
     <button @click="addProduce">Add Produce</button>
-
-
     
-    <radius></radius>
+    
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-import { mapActions } from "vuex";
-import radius from "../components/radius";
+// import { mapActions } from "vuex";
 
 export default {
   name: "home",
@@ -56,7 +53,7 @@ export default {
   },
   components: {
     
-    radius,
+    
   },
   methods: {
 
