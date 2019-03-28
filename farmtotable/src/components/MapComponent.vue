@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div><p>Lat = {{ lat }} Long = {{ lon }}</p></div>
+    <div><p>{{ lat }} {{ lon }}</p></div>
     <div><p>{{ error }}</p></div>
     <div><button @click = "myFunction()">Coords.</button></div>
   </div>
