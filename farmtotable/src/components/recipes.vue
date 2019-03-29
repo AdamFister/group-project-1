@@ -2,7 +2,7 @@
   <div id="recipes">
     <div v-show="haveRecipe">
       <div>
-        <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+        <b-card no-body class="overflow-hidden" style="max-width: 100%;">
           <b-row no-gutters>
             <b-col md="6">
               <b-card-img :src="image" class="rounded-0"></b-card-img>
@@ -16,11 +16,11 @@
                       :key="ingredient.name"
                     >{{ingredient.name}}</li>
                   </ul>
-                  <p>{{instructions}}</p>
                 </b-card-text>
               </b-card-body>
             </b-col>
           </b-row>
+          <p>{{instructions}}</p>
         </b-card>
       </div>
     </div>
