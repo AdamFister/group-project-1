@@ -37,14 +37,15 @@
 
     <button @click="getProximity">Proximity</button>
 
-    <notification/>
-    <radius></radius>
+    <!-- <notification/> -->
+    <!-- <radius/> -->
 
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+
 
 // import { mapActions } from "vuex";
 
@@ -54,6 +55,7 @@ export default {
     return {
       name_text: "",
       location_text: "",
+      produce_text: "",
       geolocationarray: []
     };
   },
@@ -72,17 +74,16 @@ export default {
     
     addFarmer() {
 
-      this.$store.dispatch("getFarmerLocation", {
-        name: this.name_text,
-        location: this.location_text,
-        geolocation: [],
+      // this.$store.dispatch("getFarmerLocation", {
+      //   name: this.name_text,
+      //   location: this.location_text,
+      //   geolocation: [],
 
 
       this.$store.dispatch("addFarmerHandler", {
         name: this.name_text,
         location: this.location_text,
-        geolocation: [],
-
+        geoLocation: {lat:0,lng:0},
         produce: [{ name: this.produce_text }]
       })
     },
