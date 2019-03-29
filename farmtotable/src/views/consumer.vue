@@ -3,7 +3,7 @@
     <h1>This is the consumer page</h1>
     <searchBar></searchBar>
     <div>{{ searchResults }}</div>
-    <notification/>
+    <notification v-bind:show="showAlert"/>
 <radius></radius>
   </div>
 </template>
@@ -23,7 +23,10 @@ export default {
   computed: {
       searchResults() {
       return this.$store.state.searchResults;
-    }
+    },
+      showAlert(){
+        return Boolean(this.$store.state.searchResults.length);
+      }
   }
 };
 </script>

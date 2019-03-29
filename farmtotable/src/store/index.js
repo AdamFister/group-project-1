@@ -19,7 +19,8 @@ export default new Vuex.Store({
     user: { 
         usergeolocation: []
     },
-    searchResults: []  
+    searchResults: [],
+    showSearchAlert: false,
   },
   mutations,
   actions,
