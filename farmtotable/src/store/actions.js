@@ -27,22 +27,20 @@ export default {
     console.log(farmerObj);
     var lat = data.results[0].geometry.location.lat;
     var lng = data.results[0].geometry.location.lng;
-    farmerObj.geolocation[0] = lat;
-    farmerObj.geolocation[1] = lng;
+    farmerObj.geolocation.push({ "lat": lat, "lng": lng });
+    // farmerObj.geolocation.push({"lng": lng});
 
     // commit farmer with location data      
     commit("addFarmer", farmerObj);
   },
 
-  getUserLocation ({state, commit}){
+  getUserLocation({ state, commit }) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        function(position) {
-          console.log(position);
+        function (position) {
           var lat = position.coords.latitude;
           var lng = position.coords.longitude;
-          console.log(position);
-          commit("addUserCoords", {lat:lat, lng:lng});
+          commit("addUserCoords", { lat: lat, lng: lng });
           console.log(state.user.usergeolocation);
         });
     } else {
@@ -51,33 +49,37 @@ export default {
   },
 
   evaluateProximity({ state, commit }, farmerObj) {
-    
-    // variables for farmer's latitude and longitude
-    var lat1 = parseInt(farmerObj.geolocation[0].lat);
-    var lon1 = parseInt(farmerObj.geolocation[0].lng);
 
-    // variables for consumer's latitude and longitude
-    var lon2 = state.user.usergeolocation[0].lng;
-    var lat2 = state.user.usergeolocation[0].lat;
-    
-    // variable set for pi
-    var pi = Math.PI;
+    for (var i = 0; i < state.allFarmers.length; i++) {
+      // variables for farmer's latitude and longitude
+      var lat1 = parseInt(state.allFarmers[i].geolocation[0].lat);
+      var lon1 = parseInt(state.allFarmers[i].geolocation[0].lng);
 
-    // variable set for Earth's radius in kilometers
-    var R = 6371;
+      // variables for consumer's latitude and longitude
+      var lon2 = state.user.usergeolocation[0].lng;
+      var lat2 = state.user.usergeolocation[0].lat;
 
-    var φ1 = lat1 * (pi/180);      
-    var φ2 = lat2 * (pi/180);
-    var Δφ = (lat2 - lat1) * (pi/180);
-    var Δλ = (lon2 - lon1) * (pi/180);
+      // variable set for pi
+      var pi = Math.PI;
 
-    var a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-      Math.cos(φ1) * Math.cos(φ2) *
-      Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      // variable set for Earth's radius in kilometers
+      var R = 6371;
 
-    // if d < 10 then take farmerObj and send it to a commit that will add it to the search results
-    var d = (R * c) * 0.000621371;
-    console.log(d);
+      // math turning the farmer's and consumer's latitudes and longitudes into radians, eventually ending in the distance betwen the two's coordinates in miles
+      var φ1 = lat1 * (pi / 180);
+      var φ2 = lat2 * (pi / 180);
+      var Δφ = (lat2 - lat1) * (pi / 180);
+      var Δλ = (lon2 - lon1) * (pi / 180);
+
+      var a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+        Math.cos(φ1) * Math.cos(φ2) *
+        Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+      var d = (R * c);
+      console.log(d);
+
+      // looping through farmer's in farmer object to get proximity between each farmer and user
+    }
   }
 }

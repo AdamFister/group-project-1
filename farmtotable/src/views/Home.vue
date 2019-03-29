@@ -46,7 +46,6 @@ export default {
   name: "home",
   data() {
     return {
-      produce_text: "",
       name_text: "",
       location_text: "",
       produce_text: ""
@@ -67,10 +66,7 @@ export default {
       this.$store.dispatch("getFarmerLocation", {
         name: this.name_text,
         location: this.location_text,
-        geolocation: [
-          0,
-          0
-        ],
+        geolocation: [],
         produce: [{ name: this.produce_text }]
       })
     },
