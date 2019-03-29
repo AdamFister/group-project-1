@@ -9,7 +9,7 @@
 </template>
 <script>
 import radius from "../components/radius";
-
+// import MapComponent from "../components/MapComponent";
 import searchBar from "../components/searchBar";
 import notification from "@/components/notification.vue";
 
