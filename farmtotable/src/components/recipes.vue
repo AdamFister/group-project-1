@@ -2,10 +2,10 @@
   <div id="recipes">
     <div v-show="haveRecipe">
       <div>
-        <b-card no-body class="overflow-hidden" style="max-width: 100%;">
+        <b-card no-body class="overflow-hidden mx-auto" style="max-width:75%;" id="card">
           <b-row no-gutters>
             <b-col md="6">
-              <b-card-img :src="image" class="rounded-0"></b-card-img>
+              <b-card-img :src="image" class="rounded-0" style="max-width:100%; max-height:75%;"></b-card-img>
             </b-col>
             <b-col md="6">
               <b-card-body :title="title">
@@ -87,4 +87,17 @@ export default {
     }
   }
 };
+
 </script>
+<style> 
+
+
+
+#card{
+  padding:50px;
+  padding-top:-10px;
+  margin:50px;
+  color:black;
+  background-color:rgba(94, 109, 41, 0.74);
+}
+</style>

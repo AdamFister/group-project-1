@@ -1,6 +1,6 @@
 <template>
-  <div id="radius">
-    <b-form-group label="Select search radius">
+  <div>
+    <b-form-group id="radius" label="Select search radius">
       <b-form-radio-group v-model="selected" :options="options" name="radioInline"/>
     </b-form-group>
 
@@ -26,3 +26,8 @@ export default {
   }
 };
 </script>
+<style>
+#radius{
+font-size:7px;
+color:blue;
+}
