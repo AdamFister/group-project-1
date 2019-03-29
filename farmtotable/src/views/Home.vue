@@ -71,7 +71,7 @@ export default {
       // this.location_text
       //api call here
       //update some variable geoloc
-      this.$store.commit("addFarmer", {
+      this.$store.dispatch("addFarmerHandler", {
         name: this.name_text,
         location: this.location_text,
         geolocation: [Math.floor(Math.random()*100),Math.floor(Math.random()*100)],
