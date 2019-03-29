@@ -3,21 +3,38 @@
     <!-- <img alt="Vue logo" src="../assets/logo.png">
      <button @click="increment">+</button>
      <button @click="decrement">-</button>
-     <div>{{ counter }}</div> -->
+    <div>{{ counter }}</div>-->
 
-     <input @keyup.enter="addName" type="text" name="name" placeholder="enter name here" v-model="name_text">
+    <input
+      @keyup.enter="addName"
+      type="text"
+      name="name"
+      placeholder="enter name here"
+      v-model="name_text"
+    >
 
-     <input @keyup.enter="addLocation" type="text" name="location" placeholder="enter location here" v-model="location_text">
+    <input
+      @keyup.enter="addLocation"
+      type="text"
+      name="location"
+      placeholder="enter location here"
+      v-model="location_text"
+    >
 
-     <input @keyup.enter="addProduce" type="text" name="produce" placeholder="enter produce here" v-model="produce_text">
+    <input
+      @keyup.enter="addProduce"
+      type="text"
+      name="produce"
+      placeholder="enter produce here"
+      v-model="produce_text"
+    >
 
-     <div>{{ allFarmers }}</div>
-      <div>{{ name }}</div>
-     <div>{{ location }}</div>
-     <div v-for="item in produce">{{ item }}</div>
-     <!-- <button @click="createProfile">Create Profile</button> -->
-     <button @click="addFarmer">Add Profile</button>
-
+    <div>{{ allFarmers }}</div>
+    <div>{{ name }}</div>
+    <div>{{ location }}</div>
+    <div v-for="item in produce">{{ item }}</div>
+    <!-- <button @click="createProfile">Create Profile</button> -->
+    <button @click="addFarmer">Add Profile</button>
   </div>
 </template>
 
@@ -26,32 +43,28 @@
 
 import { mapActions } from "vuex";
 
-
 export default {
-  name: 'home',
-  data () {
+  name: "home",
+  data() {
     return {
-      produce_text:"",
-      name_text:"",
-      location_text:"",
-      produce_text:""
-    }
+      produce_text: "",
+      name_text: "",
+      location_text: "",
+      produce_text: ""
+    };
   },
-  components: {
-   
-    
-  },
+  components: {},
   methods: {
     increment() {
       this.$store.commit("increment");
     },
-    decrement (){
-      this.$store.commit('decrement');
+    decrement() {
+      this.$store.commit("decrement");
     },
-    addProduce () {
+    addProduce() {
       var p = this.produce_text;
       // console.log(p);
-      this.$store.commit('addProduce', {produce:p});
+      this.$store.commit("addProduce", { produce: p });
       this.produce_text = "";
     },
     // addName () {
@@ -64,27 +77,30 @@ export default {
     //   this.$store.commit('addLocation', {location:l});
     //   this.location_text = "";
     // },
-    addFarmer () {
-      this.$store.commit('addFarmer', {name:this.name_text, location:this.location_text, produce:[ {name:this.produce_text}]});
+    addFarmer() {
+      this.$store.commit("addFarmer", {
+        name: this.name_text,
+        location: this.location_text,
+        produce: [{ name: this.produce_text }]
+      });
     }
   },
   computed: {
     counter() {
       return this.$store.state.counter;
     },
-    name (){
+    name() {
       return this.$store.state.farmers.name;
     },
-    location (){
+    location() {
       return this.$store.state.farmers.location;
     },
-    produce (){
+    produce() {
       return this.$store.state.farmers.produce;
     },
-    allFarmers (){
+    allFarmers() {
       return this.$store.state.allFarmers;
     }
-
   }
 };
 </script>

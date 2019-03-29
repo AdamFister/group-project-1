@@ -14,8 +14,8 @@ export default new Vuex.Store({
       location: "",
       produce: []
     },
-    allFarmers: JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '[]'),  
-    recipes:[],
+    allFarmers: JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '[]'),
+    recipe:{},
   },
   mutations,
   actions,

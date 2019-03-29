@@ -22,7 +22,7 @@ export default {
     notification,
     radius,
     recipes
-  },
+  }
 }
 
 

@@ -27,8 +27,8 @@ export default {
 					// Examine the text in the response
 					response.json().then(function (data) {
 						//console.log("about to enter reciperesltshander actions.js line 30");
-						//console.log(data);
-						commit('recipeResultsHandler', data);
+						console.log(data.recipes[0]);
+						commit('recipeResultsHandler', data.recipes[0]);
 					});
 				}
 			)

@@ -28,7 +28,6 @@ export const mutations = {
 	recipeResultsHandler(state, recipeResults) {
 		//console.log(recipeResults);
 		//console.log("in the recipes mutations.js line 30");
-		state.recipes = recipeResults;
-		console.log(state.recipes);
+		state.recipe = recipeResults;
 	}
 }
