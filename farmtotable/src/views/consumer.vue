@@ -10,7 +10,7 @@
 
         <b-button @click="submit" variant="success" class="m-1">Search</b-button>
       </div>
-    <div>{{ searchResults }}</div>
+    <div>{{ searchResults}}</div>
     <notification v-bind:show="showAlert"/>
 <radius></radius>
     <recipes/>
@@ -37,25 +37,34 @@ export default {
       produce: "",
       nuProduce: "",
       showAlert: false
-
     };
   },
   computed: {
       searchResults() {
       return this.$store.state.searchResults;
     },
-      // showAlert(){
-      //   return Boolean(this.$store.state.searchResults.length);
-      // }
   },
   methods: {
     submit() {
       this.produce = this.nuProduce;
       this.nuProduce = "";
-      console.log(this.$store);
-      //this.$store.dispatch("getUserLocation")
-      this.$store.dispatch("searchForProduce", {item: this.produce});
+      var obj = {item: this.produce};
+      this.$store.dispatch("searchForProduce", obj)
     }
+  },
+  mounted: function (){
+    this.$store.dispatch("getUserLocation")
+
+    // name() {
+    //   return this.$store.state.allFarmers.name;
+    // },
+    // location() {
+    //   return this.$store.state.allFarmers.location;
+    // },
+    // produce() {
+    //   return this.$store.state.allFarmers.produce;
+    // }
+
   }
 };
 </script>

@@ -2,7 +2,7 @@
 <template>
   <div>
     <p>Searching for :{{" " + produce}}</p>
-
+ <!-- on enter call submit -->
     <input @keyup.enter="submit" type="text" v-model="nuProduce" placeholder="Produce">
 
       <div id="notification">
@@ -19,7 +19,7 @@
 
 export default {
   components: {
-    // notification
+
   },
   name: "searchBar",
 
@@ -32,6 +32,7 @@ export default {
     };
   },
   methods: {
+    // user field is bound to nuProduce and on submit produce set to equal nuProduce
     submit() {
       this.produce = this.nuProduce;
       this.nuProduce = "";

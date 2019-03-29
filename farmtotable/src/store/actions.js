@@ -52,12 +52,12 @@ export default {
     var unit = "M";
     // looping through farmer's in farmer object to get proximity between each farmer and user
     // for (var i = 0; i < state.allFarmers.length; i++) {
- 
       // variables for farmer's latitude and longitude
       var lat1 = farmerObj.geoLocation.lat;
       var lon1 = farmerObj.geoLocation.lng;
  
       // variables for consumer's latitude and longitude
+      console.log(state.user.usergeolocation);
       var lon2 = state.user.usergeolocation[0].lng;
       var lat2 = state.user.usergeolocation[0].lat;
  
@@ -84,90 +84,84 @@ export default {
       }
       console.log(d);
       return d;
-    },
-    async getRecipesByRandom({ state, commit }) {
-        fetch('https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1', {
-            method: "GET", // *GET, POST, PUT, DELETE, etc.
-            mode: "cors", // no-cors, cors, *same-origin
-            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: "same-origin", // include, *same-origin, omit
-            headers: {
-                "Content-Type": "application/json",
-                // "Content-Type": "application/x-www-form-urlencoded",
-                "X-RapidAPI-Key": "a585a9b005msh459bd2f7657ed56p17e34bjsn1f0dd44c7986"
-            },
-            redirect: "follow", // manual, *follow, error
-            referrer: "no-referrer", // no-referrer, *client
-        })
-            .then(
-                function (response) {
-                    if (response.status !== 200) {
-                        console.log('Looks like there was a problem. Status Code: ' +
-                            response.status);
-                        return;
-                    }
+  },
 
-                    // Examine the text in the response
-                    response.json().then(function (data) {
-                        //console.log("about to enter reciperesltshander actions.js line 30");
-                        console.log(data.recipes[0]);
-                        commit('recipeResultsHandler', data.recipes[0]);
-                    });
-                }
-            )
-            .catch(function (err) {
-                console.log('Fetch Error :-S', err);
-            });
+  searchForProduce({state, commit}, produceObj) {
+ 
+    var tempSearch = [];
+    
+    for (let i = 0; i < state.allFarmers.length; i++) {
+      let produceLength = state.allFarmers[i].produce.length;
+      for (let j = 0; j < produceLength; j++) {
+        if (state.allFarmers[i].produce[j].name == produceObj.item) {
 
-    },
-
-    searchForProduce({state, commit}, produceObj) {
-      // console.log(state.allFarmers.length);
-      // console.log(produceObj.item);
-      // console.log(state.allFarmers[0].produce[0].name);
-
-      var tempSearch = [];
-      
-      for (let i = 0; i < state.allFarmers.length; i++) {
-        let produceLength = state.allFarmers[i].produce.length;
-        for (let j = 0; j < produceLength; j++) {
-          if (state.allFarmers[i].produce[j].name == produceObj.item) {
-  
-            // console.log(state.allFarmers[i]);
-            var promiseDistance = this.$store.dispatch("evaluateProximity", state.allFarmers[i]);
-        promiseDistance.then(function(value) {
-          console.log(value);
-          if(value < 10){
-            console.log("add this farmer");
-            tempSearch.push(state.allFarmers[i]);
-          }
-        }); 
-          }
+          var promiseDistance = this.dispatch("evaluateProximity", state.allFarmers[i]);
+          promiseDistance.then(function(value) {
+            if(value < 10){
+              tempSearch.push(state.allFarmers[i]);
+            }
+          }); 
         }
-  
       }
-      this.commit("validateProduceSearch", tempSearch);
-      
-    },
-    addFarmerHandler({ state, commit }, farmerObj) {
-        if (state.allFarmers.length != 0) {
-            for (let i = 0; i < state.allFarmers.length; i++) {
-                console.log("name_entered: " + farmerObj.name);
-                console.log("existing name: " + state.allFarmers[i].name + i);
-                if (farmerObj.name == state.allFarmers[i].name) {
-                    console.log("FARMER NAME TAKEN");
-                    return 0;
-                }
-
-            } console.log("NO MATCHES");
-            //commit("addFarmer", farmerObj);
-            this.dispatch('getFarmerLocation', farmerObj);
-
-        } else {
-            console.log("PUSH TWO");
-            this.dispatch('getFarmerLocation', farmerObj);
-        }
     }
+    this.commit("validateProduceSearch", tempSearch);
+  },
+
+  addFarmerHandler({ state, commit }, farmerObj) {
+      if (state.allFarmers.length != 0) {
+          for (let i = 0; i < state.allFarmers.length; i++) {
+              console.log("name_entered: " + farmerObj.name);
+              console.log("existing name: " + state.allFarmers[i].name + i);
+              if (farmerObj.name == state.allFarmers[i].name) {
+                  console.log("FARMER NAME TAKEN");
+                  return 0;
+              }
+
+          } console.log("NO MATCHES");
+          //commit("addFarmer", farmerObj);
+          this.dispatch('getFarmerLocation', farmerObj);
+
+      } else {
+          console.log("PUSH TWO");
+          this.dispatch('getFarmerLocation', farmerObj);
+      }
+  },
+  async getRecipesByRandom({ state, commit }) {
+      fetch('https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1', {
+          method: "GET", // *GET, POST, PUT, DELETE, etc.
+          mode: "cors", // no-cors, cors, *same-origin
+          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: "same-origin", // include, *same-origin, omit
+          headers: {
+              "Content-Type": "application/json",
+              // "Content-Type": "application/x-www-form-urlencoded",
+              "X-RapidAPI-Key": "a585a9b005msh459bd2f7657ed56p17e34bjsn1f0dd44c7986"
+          },
+          redirect: "follow", // manual, *follow, error
+          referrer: "no-referrer", // no-referrer, *client
+      })
+          .then(
+              function (response) {
+                  if (response.status !== 200) {
+                      console.log('Looks like there was a problem. Status Code: ' +
+                          response.status);
+                      return;
+                  }
+
+                  // Examine the text in the response
+                  response.json().then(function (data) {
+                      //console.log("about to enter reciperesltshander actions.js line 30");
+                      console.log(data.recipes[0]);
+                      commit('recipeResultsHandler', data.recipes[0]);
+                  });
+              }
+          )
+          .catch(function (err) {
+              console.log('Fetch Error :-S', err);
+          });
+
+  },
+
 }
 
 
