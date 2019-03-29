@@ -10,8 +10,8 @@ export const mutations = {
     addUserCoords (state, pos) {
       let lat = pos.lat;
       let lon = pos.lng;
-      console.log("lat:",lat);
-      console.log("lon:",lon);
+
+
       state.user.usergeolocation.push({lat:lat, lng:lon})
     },
         
@@ -58,18 +58,23 @@ export const mutations = {
     // console.log(state.allFarmers.length);
     // console.log(produceObj.item);
     // console.log(state.allFarmers[0].produce[0].name);
-
+    state.searchResults = [];
+    
     for (let i = 0; i < state.allFarmers.length; i++) {
       let produceLength = state.allFarmers[i].produce.length;
       for (let j = 0; j < produceLength; j++) {
         if (state.allFarmers[i].produce[j].name == produceObj.item) {
-          console.log("FARMER HAS " + produceObj.item);
+
           // console.log(state.allFarmers[i]);
           state.searchResults.push(state.allFarmers[i]);
         }
       }
 
     }
+  },
+
+  validateProduceSearch(state, tempResults){
+    state.searchResults = tempResults;
   },
   recipeResultsHandler(state, recipeResults) {
     state.recipe = recipeResults;

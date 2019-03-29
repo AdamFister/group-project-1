@@ -6,10 +6,10 @@
     <input @keyup.enter="submit" type="text" v-model="nuProduce" placeholder="Produce">
 
       <div id="notification">
-    <b-alert dismissible variant="success" v-model="showAlert">We have found providers in your area!</b-alert>
+        <b-alert dismissible variant="success" v-model="showAlert">We have found providers in your area!</b-alert>
 
-    <b-button @click="submit" variant="success" class="m-1">Search</b-button>
-  </div>
+        <b-button @click="submit" variant="success" class="m-1">Search</b-button>
+      </div>
   </div>
 </template>
 
@@ -35,9 +35,8 @@ export default {
     submit() {
       this.produce = this.nuProduce;
       this.nuProduce = "";
-      this.$store.commit("searchForProduce", {
-        item: this.produce
-      });
+      console.log(this.$store);
+      this.$store.dispatch('searchForProduce', {item: this.produce});
     }
   }
 };

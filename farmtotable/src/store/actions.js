@@ -1,5 +1,3 @@
-import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from "constants";
-
 export default {
 
   addFarmerAction({ state, commit }, farmerObj) {
@@ -87,10 +85,6 @@ export default {
       console.log(d);
       return d;
     },
-
-    addFarmerAction({ state, commit }, farmerObj) {
-        commit('addFarmer', farmerObj);
-    },
     async getRecipesByRandom({ state, commit }) {
         fetch('https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1', {
             method: "GET", // *GET, POST, PUT, DELETE, etc.
@@ -126,6 +120,35 @@ export default {
             });
 
     },
+
+    searchForProduce({state, commit}, produceObj) {
+      // console.log(state.allFarmers.length);
+      // console.log(produceObj.item);
+      // console.log(state.allFarmers[0].produce[0].name);
+
+      var tempSearch = [];
+      
+      for (let i = 0; i < state.allFarmers.length; i++) {
+        let produceLength = state.allFarmers[i].produce.length;
+        for (let j = 0; j < produceLength; j++) {
+          if (state.allFarmers[i].produce[j].name == produceObj.item) {
+  
+            // console.log(state.allFarmers[i]);
+            var promiseDistance = this.$store.dispatch("evaluateProximity", state.allFarmers[i]);
+        promiseDistance.then(function(value) {
+          console.log(value);
+          if(value < 10){
+            console.log("add this farmer");
+            tempSearch.push(state.allFarmers[i]);
+          }
+        }); 
+          }
+        }
+  
+      }
+      this.commit("validateProduceSearch", tempSearch);
+      
+    },
     addFarmerHandler({ state, commit }, farmerObj) {
         if (state.allFarmers.length != 0) {
             for (let i = 0; i < state.allFarmers.length; i++) {
@@ -146,4 +169,5 @@ export default {
         }
     }
 }
+
 
