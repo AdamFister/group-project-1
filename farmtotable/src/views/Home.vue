@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-
+<!-- @keyup.enter="addFarmer" -->
     <input
-      @keyup.enter="addName"
+      
       type="text"
       name="name"
       placeholder="enter name here"
@@ -10,7 +10,7 @@
     >
 
     <input
-      @keyup.enter="addLocation"
+      
       type="text"
       name="location"
       placeholder="enter location here"
@@ -18,7 +18,7 @@
     >
 
     <input
-      @keyup.enter="addProduce"
+      
       type="text"
       name="produce"
       placeholder="enter produce here"
@@ -26,6 +26,9 @@
     >
 
     <div>{{ allFarmers }}</div>
+    <!-- <p>Name: {{ name }}</p>
+    <p>Location: {{ location }}</p>
+    <p>Produce: {{ produce }}</p> -->
 
     <!-- <div v-for="item in produce">{{ item }}</div> -->
     <!-- <button @click="createProfile">Create Profile</button> -->
@@ -68,7 +71,7 @@ export default {
       // this.location_text
       //api call here
       //update some variable geoloc
-      this.$store.commit("addFarmer", {
+      this.$store.dispatch("addFarmerHandler", {
         name: this.name_text,
         location: this.location_text,
         geolocation: [Math.floor(Math.random()*100),Math.floor(Math.random()*100)],
@@ -78,20 +81,18 @@ export default {
     }
   },
   computed: {
-
-    name() {
-      return this.$store.state.farmers.name;
-    },
-    location() {
-      return this.$store.state.farmers.location;
-    },
-    produce() {
-      return this.$store.state.farmers.produce;
-    },
-
     allFarmers() {
       return this.$store.state.allFarmers;
     }
+    // name() {
+    //   return this.$store.state.allFarmers.name;
+    // },
+    // location() {
+    //   return this.$store.state.allFarmers.location;
+    // },
+    // produce() {
+    //   return this.$store.state.allFarmers.produce;
+    // }
   }
 };
 </script>
