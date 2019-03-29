@@ -15,12 +15,14 @@ export default new Vuex.Store({
       produce: []
     },
     allFarmers: JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '[]'),
+    recipe:{},
 
     user: { 
         usergeolocation: []
     },
-    searchResults: [],
-    showSearchAlert: false,
+
+    searchResults: []  
+
   },
   mutations,
   actions,
