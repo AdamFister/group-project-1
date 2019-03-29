@@ -89,7 +89,6 @@ export default {
         var farmerObj = this.$store.state.allFarmers[i];
         var promiseDistance = this.$store.dispatch("evaluateProximity", farmerObj);
         promiseDistance.then(function(value) {
-          console.log(value);
           if(value < 10){
             console.log("add this farmer");
           }

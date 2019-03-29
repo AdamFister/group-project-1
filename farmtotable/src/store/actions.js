@@ -52,8 +52,6 @@ export default {
 
   evaluateProximity({ state, commit }, farmerObj) {
     var unit = "M";
-    // looping through farmer's in farmer object to get proximity between each farmer and user
-    // for (var i = 0; i < state.allFarmers.length; i++) {
  
       // variables for farmer's latitude and longitude
       var lat1 = farmerObj.geoLocation.lat;
@@ -84,12 +82,7 @@ export default {
         if (unit=="N") { dist = dist * 0.8684 }
         d = dist;
       }
-      console.log(d);
       return d;
-    },
-
-    addFarmerAction({ state, commit }, farmerObj) {
-        commit('addFarmer', farmerObj);
     },
     async getRecipesByRandom({ state, commit }) {
         fetch('https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1', {
