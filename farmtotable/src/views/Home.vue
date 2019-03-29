@@ -5,7 +5,7 @@
       
       type="text"
       name="name"
-      placeholder="enter name here"
+      placeholder="Name"
       v-model="name_text"
     >
 
@@ -13,7 +13,7 @@
       
       type="text"
       name="location"
-      placeholder="enter location here"
+      placeholder="Address, City, State"
       v-model="location_text"
     >
 
@@ -21,7 +21,7 @@
       
       type="text"
       name="produce"
-      placeholder="enter produce here"
+      placeholder="Produce"
       v-model="produce_text"
     >
 
