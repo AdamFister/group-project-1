@@ -56,8 +56,8 @@ export default {
     // for (var i = 0; i < state.allFarmers.length; i++) {
  
       // variables for farmer's latitude and longitude
-      var lat1 = farmerObj.geolocation[0].lat;
-      var lon1 = farmerObj.geolocation[0].lng;
+      var lat1 = farmerObj.geoLocation.lat;
+      var lon1 = farmerObj.geoLocation.lng;
  
       // variables for consumer's latitude and longitude
       var lon2 = state.user.usergeolocation[0].lng;
