@@ -34,24 +34,50 @@ export default {
     commit("addFarmer", farmerObj);
   },
 
-  evaluateProximity({ state, commit }, farmerObj) {
-    var lat1 = farmerObj.geolocation[0];
-    var lat2 = state.user.usergeolocation[0].lat;
-    var lon1 = farmerObj.geolocation[1];
-    var lon2 = state.user.usergeolocation[0].lon;
+  getUserLocation ({state, commit}){
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          console.log(position);
+          var lat = position.coords.latitude;
+          var lng = position.coords.longitude;
+          console.log(position);
+          commit("addUserCoords", {lat:lat, lng:lng});
+          console.log(state.user.usergeolocation);
+        });
+    } else {
+      this.error = "Geolocation is not supported.";
+    }
+  },
 
-    var R = 6371e3; // metres
-    var φ1 = lat1.toRadians();
-    var φ2 = lat2.toRadians();
-    var Δφ = (lat2 - lat1).toRadians();
-    var Δλ = (lon2 - lon1).toRadians();
+  evaluateProximity({ state, commit }, farmerObj) {
+    
+    // variables for farmer's latitude and longitude
+    var lat1 = parseInt(farmerObj.geolocation[0].lat);
+    var lon1 = parseInt(farmerObj.geolocation[0].lng);
+
+    // variables for consumer's latitude and longitude
+    var lon2 = state.user.usergeolocation[0].lng;
+    var lat2 = state.user.usergeolocation[0].lat;
+    
+    // variable set for pi
+    var pi = Math.PI;
+
+    // variable set for Earth's radius in kilometers
+    var R = 6371;
+
+    var φ1 = lat1 * (pi/180);      
+    var φ2 = lat2 * (pi/180);
+    var Δφ = (lat2 - lat1) * (pi/180);
+    var Δλ = (lon2 - lon1) * (pi/180);
 
     var a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
       Math.cos(φ1) * Math.cos(φ2) *
       Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-    var d = R * c;
+    // if d < 10 then take farmerObj and send it to a commit that will add it to the search results
+    var d = (R * c) * 0.000621371;
     console.log(d);
   }
 }

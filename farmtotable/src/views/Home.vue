@@ -29,7 +29,7 @@
     <!-- <button @click="createProfile">Create Profile</button> -->
     <button @click="addFarmer">Add Profile</button>
     <button @click="addProduce">Add Produce</button>
-    <button @click="evaluateProximity">Proximity</button>
+    <button @click="getProximity">Proximity</button>
 
     <notification/>
     <radius></radius>
@@ -75,13 +75,17 @@ export default {
       })
     },
     getProximity() {
-      
+      var farmerObj = this.$store.state.allFarmers[0];
+      this.$store.dispatch("evaluateProximity", farmerObj)
     }
   },
   computed: {
     allFarmers() {
       return this.$store.state.allFarmers;
     }
+  },
+  mounted: function (){
+    this.$store.dispatch("getUserLocation")
   }
 };
 </script>

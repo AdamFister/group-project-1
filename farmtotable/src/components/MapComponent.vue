@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <!-- <div>
     <div><p>{{ lat }} {{ lon }}</p></div>
     <div><p>{{ error }}</p></div>
     <div><button @click = "getUserCoords()">Get Location</button></div>
-  </div>
+  </div> -->
 </template>
 
 <script>

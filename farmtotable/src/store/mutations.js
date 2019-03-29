@@ -18,8 +18,8 @@ export const mutations = {
     },
 
     addUserCoords (state, pos) {
-      let lat = pos.coords.latitude;
-      let lon = pos.coords.longitude;
+      let lat = pos.lat;
+      let lon = pos.lng;
       console.log("lat:",lat);
       console.log("lon:",lon);
       state.user.usergeolocation.push ({lat:lat, lng:lon});
