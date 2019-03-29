@@ -58,6 +58,7 @@ export default {
     
     
   },
+  components: {},
   methods: {
 
     addProduce() {
