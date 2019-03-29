@@ -37,14 +37,15 @@
 
     <button @click="getProximity">Proximity</button>
 
-    <notification/>
-    <radius></radius>
+    <!-- <notification/> -->
+    <!-- <radius/> -->
 
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+
 
 // import { mapActions } from "vuex";
 
@@ -54,14 +55,12 @@ export default {
     return {
       name_text: "",
       location_text: "",
+      produce_text: "",
       geolocationarray: []
     };
   },
-  components: {
-    
-    
+  components: {    
   },
-  components: {},
   methods: {
     addProduce() {
       var p = this.produce_text;
@@ -72,30 +71,36 @@ export default {
     
     addFarmer() {
 
-      this.$store.dispatch("getFarmerLocation", {
-        name: this.name_text,
-        location: this.location_text,
-        geolocation: [],
+      // this.$store.dispatch("getFarmerLocation", {
+      //   name: this.name_text,
+      //   location: this.location_text,
+      //   geolocation: [],
 
 
       this.$store.dispatch("addFarmerHandler", {
         name: this.name_text,
         location: this.location_text,
-        geolocation: [],
-
+        geoLocation: {lat:0,lng:0},
         produce: [{ name: this.produce_text }]
       })
     },
     getProximity() {
-      var farmerObj = this.$store.state.allFarmers[0];
-      this.$store.dispatch("evaluateProximity", farmerObj)
+      for(var i = 0; i < this.$store.state.allFarmers.length; i++){
+        var farmerObj = this.$store.state.allFarmers[i];
+        var promiseDistance = this.$store.dispatch("evaluateProximity", farmerObj);
+        promiseDistance.then(function(value) {
+          console.log(value);
+          if(value < 10){
+            console.log("add this farmer");
+          }
+        }); 
+      }      
     }
   },
   computed: {
     allFarmers() {
       return this.$store.state.allFarmers;
     }
-
   },
   mounted: function (){
     this.$store.dispatch("getUserLocation")

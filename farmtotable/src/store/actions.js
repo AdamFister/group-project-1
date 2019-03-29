@@ -1,6 +1,5 @@
 import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from "constants";
 
-
 export default {
 
   addFarmerAction({ state, commit }, farmerObj) {
@@ -29,7 +28,8 @@ export default {
     console.log(farmerObj);
     var lat = data.results[0].geometry.location.lat;
     var lng = data.results[0].geometry.location.lng;
-    farmerObj.geolocation.push({ "lat": lat, "lng": lng });
+    farmerObj.geoLocation.lat = lat;
+    farmerObj.geoLocation.lng = lng;
     // farmerObj.geolocation.push({"lng": lng});
 
     // commit farmer with location data      
@@ -51,95 +51,98 @@ export default {
   },
 
   evaluateProximity({ state, commit }, farmerObj) {
-
-    for (var i = 0; i < state.allFarmers.length; i++) {
+    var unit = "M";
+    // looping through farmer's in farmer object to get proximity between each farmer and user
+    // for (var i = 0; i < state.allFarmers.length; i++) {
+ 
       // variables for farmer's latitude and longitude
-      var lat1 = parseInt(state.allFarmers[i].geolocation[0].lat);
-      var lon1 = parseInt(state.allFarmers[i].geolocation[0].lng);
-
+      var lat1 = farmerObj.geoLocation.lat;
+      var lon1 = farmerObj.geoLocation.lng;
+ 
       // variables for consumer's latitude and longitude
       var lon2 = state.user.usergeolocation[0].lng;
       var lat2 = state.user.usergeolocation[0].lat;
-
-      // variable set for pi
-      var pi = Math.PI;
-
-      // variable set for Earth's radius in kilometers
-      var R = 6371;
-
-      // math turning the farmer's and consumer's latitudes and longitudes into radians, eventually ending in the distance betwen the two's coordinates in miles
-      var φ1 = lat1 * (pi / 180);
-      var φ2 = lat2 * (pi / 180);
-      var Δφ = (lat2 - lat1) * (pi / 180);
-      var Δλ = (lon2 - lon1) * (pi / 180);
-
-      var a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-        Math.cos(φ1) * Math.cos(φ2) *
-        Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-      var d = (R * c);
+ 
+      // math for determining distance between consumer's location and farmer's location
+      var d = 0;
+      if ((lat1 == lat2) && (lon1 == lon2)) {
+        d = 0;
+      }
+      else {
+        var radlat1 = Math.PI * lat1/180;
+        var radlat2 = Math.PI * lat2/180;
+        var theta = lon1-lon2;
+        var radtheta = Math.PI * theta/180;
+        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+        if (dist > 1) {
+          dist = 1;
+        }
+        dist = Math.acos(dist);
+        dist = dist * 180/Math.PI;
+        dist = dist * 60 * 1.1515;
+        if (unit=="K") { dist = dist * 1.609344 }
+        if (unit=="N") { dist = dist * 0.8684 }
+        d = dist;
+      }
       console.log(d);
+      return d;
+    },
 
-      // looping through farmer's in farmer object to get proximity between each farmer and user
-    }
-  }
-}
+    addFarmerAction({ state, commit }, farmerObj) {
+        commit('addFarmer', farmerObj);
+    },
+    async getRecipesByRandom({ state, commit }) {
+        fetch('https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1', {
+            method: "GET", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, cors, *same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: "same-origin", // include, *same-origin, omit
+            headers: {
+                "Content-Type": "application/json",
+                // "Content-Type": "application/x-www-form-urlencoded",
+                "X-RapidAPI-Key": "a585a9b005msh459bd2f7657ed56p17e34bjsn1f0dd44c7986"
+            },
+            redirect: "follow", // manual, *follow, error
+            referrer: "no-referrer", // no-referrer, *client
+        })
+            .then(
+                function (response) {
+                    if (response.status !== 200) {
+                        console.log('Looks like there was a problem. Status Code: ' +
+                            response.status);
+                        return;
+                    }
 
-	addFarmerAction({ state, commit }, farmerObj) {
-		commit('addFarmer', farmerObj);
-	},
-	async getRecipesByRandom({ state, commit }, 		) {
-		fetch('https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1', {
-			method: "GET", // *GET, POST, PUT, DELETE, etc.
-			mode: "cors", // no-cors, cors, *same-origin
-			cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-			credentials: "same-origin", // include, *same-origin, omit
-			headers: {
-				"Content-Type": "application/json",
-				// "Content-Type": "application/x-www-form-urlencoded",
-				"X-RapidAPI-Key": "a585a9b005msh459bd2f7657ed56p17e34bjsn1f0dd44c7986"
-			},
-			redirect: "follow", // manual, *follow, error
-			referrer: "no-referrer", // no-referrer, *client
-		})
-			.then(
-				function (response) {
-					if (response.status !== 200) {
-						console.log('Looks like there was a problem. Status Code: ' +
-							response.status);
-						return;
-					}
+                    // Examine the text in the response
+                    response.json().then(function (data) {
+                        //console.log("about to enter reciperesltshander actions.js line 30");
+                        console.log(data.recipes[0]);
+                        commit('recipeResultsHandler', data.recipes[0]);
+                    });
+                }
+            )
+            .catch(function (err) {
+                console.log('Fetch Error :-S', err);
+            });
 
-					// Examine the text in the response
-					response.json().then(function (data) {
-						//console.log("about to enter reciperesltshander actions.js line 30");
-						console.log(data.recipes[0]);
-						commit('recipeResultsHandler', data.recipes[0]);
-					});
-				}
-			)
-			.catch(function (err) {
-				console.log('Fetch Error :-S', err);
-			});
-
-	},
-    addFarmerHandler( { state, commit }, farmerObj) {
+    },
+    addFarmerHandler({ state, commit }, farmerObj) {
         if (state.allFarmers.length != 0) {
-            for (let i = 0; i < state.allFarmers.length; i++) { 
+            for (let i = 0; i < state.allFarmers.length; i++) {
                 console.log("name_entered: " + farmerObj.name);
                 console.log("existing name: " + state.allFarmers[i].name + i);
                 if (farmerObj.name == state.allFarmers[i].name) {
                     console.log("FARMER NAME TAKEN");
                     return 0;
-                } 
-    
+                }
+
             } console.log("NO MATCHES");
-              commit("addFarmer", farmerObj);
+            //commit("addFarmer", farmerObj);
+            this.dispatch('getFarmerLocation', farmerObj);
 
         } else {
             console.log("PUSH TWO");
-            commit("addFarmer", farmerObj);
+            this.dispatch('getFarmerLocation', farmerObj);
         }
     }
 }
