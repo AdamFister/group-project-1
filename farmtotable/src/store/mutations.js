@@ -7,6 +7,14 @@ if (navigator.userAgent.indexOf('PhantomJS') > -1) {
 
 export const mutations = {
 
+    addUserCoords (state, pos) {
+      let lat = pos.lat;
+      let lon = pos.lng;
+      console.log("lat:",lat);
+      console.log("lon:",lon);
+      state.user.usergeolocation.push ({lat:lat, lng:lon}),
+        
+      
   addProduce(state, produceToAdd) {
     state.allFarmers[state.allFarmers.length - 1].produce.push(produceToAdd.produce);
   },
@@ -57,6 +65,7 @@ export const mutations = {
           state.searchResults.push(state.allFarmers[i]);
         }
       }
+
     }
   },
   recipeResultsHandler(state, recipeResults) {
