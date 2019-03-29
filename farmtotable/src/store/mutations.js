@@ -11,7 +11,6 @@ export const mutations = {
       let lat = pos.lat;
       let lon = pos.lng;
 
-
       state.user.usergeolocation.push({lat:lat, lng:lon})
     },
         
@@ -22,9 +21,6 @@ export const mutations = {
 
   addFarmer(state, farmerObj) {
     state.allFarmers.push(farmerObj);
-
-
-
 
     // console.log(state.allFarmers.name);
     // if (state.allFarmers.length != 0) {
@@ -59,12 +55,11 @@ export const mutations = {
     // console.log(produceObj.item);
     // console.log(state.allFarmers[0].produce[0].name);
     state.searchResults = [];
-    
     for (let i = 0; i < state.allFarmers.length; i++) {
       let produceLength = state.allFarmers[i].produce.length;
       for (let j = 0; j < produceLength; j++) {
         if (state.allFarmers[i].produce[j].name == produceObj.item) {
-
+          console.log("FARMER HAS " + produceObj.item);
           // console.log(state.allFarmers[i]);
           state.searchResults.push(state.allFarmers[i]);
         }
@@ -72,7 +67,6 @@ export const mutations = {
 
     }
   },
-
   validateProduceSearch(state, tempResults){
     state.searchResults = tempResults;
   },

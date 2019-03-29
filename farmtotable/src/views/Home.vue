@@ -35,7 +35,7 @@
     <button @click="addFarmer">Add Profile</button>
     <button @click="addProduce">Add Produce</button>
 
-    <button @click="getProximity">Proximity</button>
+    <!-- <button @click="getProximity">Proximity</button> -->
 
     <!-- <notification/> -->
     <!-- <radius/> -->
