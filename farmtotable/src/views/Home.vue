@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-<!-- @keyup.enter="addFarmer" -->
+
     <input
       
       type="text"
@@ -34,8 +34,12 @@
     <!-- <button @click="createProfile">Create Profile</button> -->
     <button @click="addFarmer">Add Profile</button>
     <button @click="addProduce">Add Produce</button>
-    
-    
+
+    <button @click="getProximity">Proximity</button>
+
+    <notification/>
+    <radius></radius>
+
   </div>
 </template>
 
@@ -48,7 +52,6 @@ export default {
   name: "home",
   data() {
     return {
-      produce_text: "",
       name_text: "",
       location_text: "",
       geolocationarray: []
@@ -60,31 +63,43 @@ export default {
   },
   components: {},
   methods: {
-
     addProduce() {
       var p = this.produce_text;
       // console.log(p);
-      this.$store.commit("addProduce", {produce: {name: p}});
+      this.$store.commit("addProduce", { produce: { name: p } });
       this.produce_text = "";
     },
     
     addFarmer() {
-      // this.location_text
-      //api call here
-      //update some variable geoloc
+
+      this.$store.dispatch("getFarmerLocation", {
+        name: this.name_text,
+        location: this.location_text,
+        geolocation: [],
+
+
       this.$store.dispatch("addFarmerHandler", {
         name: this.name_text,
         location: this.location_text,
-        geolocation: [Math.floor(Math.random()*100),Math.floor(Math.random()*100)],
-        // geolocation: this.geolocationarray,
+        geolocation: [],
+
         produce: [{ name: this.produce_text }]
-      });
+      })
+    },
+    getProximity() {
+      var farmerObj = this.$store.state.allFarmers[0];
+      this.$store.dispatch("evaluateProximity", farmerObj)
     }
   },
   computed: {
     allFarmers() {
       return this.$store.state.allFarmers;
     }
+
+  },
+  mounted: function (){
+    this.$store.dispatch("getUserLocation")
+
     // name() {
     //   return this.$store.state.allFarmers.name;
     // },
@@ -94,6 +109,7 @@ export default {
     // produce() {
     //   return this.$store.state.allFarmers.produce;
     // }
+
   }
 };
 </script>
