@@ -29,7 +29,7 @@ export const mutations = {
       // console.log(state.allFarmers.length);
       // console.log(produceObj.item);
       // console.log(state.allFarmers[0].produce[0].name);
-      
+      state.searchResults = [];
       for (let i=0; i<state.allFarmers.length; i++) {
         if (state.allFarmers[i].produce[0].name == produceObj.item) {
           // console.log("FARMER HAS IT");
